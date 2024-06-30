@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet, SafeAreaView, Platform, ScrollView } from "react-native";
+import PokemonCard from "./components/PokemonCard";
+import { pokemonCardList } from "./@fakeDb/pokemon";
+pokemonCardList;
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>
+        {pokemonCardList.map((el, index) => {
+          return <PokemonCard key={index} {...el} />;
+        })}
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#f5f5f5",
+    paddingTop: Platform.OS === "android" ? 30 : 0,
   },
 });
